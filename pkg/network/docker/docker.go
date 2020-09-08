@@ -6,7 +6,6 @@ import (
 
 	meta "github.com/weaveworks/ignite/pkg/apis/meta/v1alpha1"
 	"github.com/weaveworks/ignite/pkg/network"
-	"github.com/weaveworks/ignite/pkg/providers"
 	"github.com/weaveworks/ignite/pkg/runtime"
 )
 
@@ -23,7 +22,8 @@ func (*dockerNetworkPlugin) Name() network.PluginName {
 }
 
 func (*dockerNetworkPlugin) PrepareContainerSpec(container *runtime.ContainerConfig) error {
-	container.NetworkMode = string(providers.DockerNetworkName)
+	// TODO
+	// container.NetworkMode = string(providers.DockerNetworkName)
 	return nil
 }
 

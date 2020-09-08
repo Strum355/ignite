@@ -170,7 +170,7 @@ func (dc *dockerClient) RunContainer(image meta.OCIImageRef, config *runtime.Con
 		StopTimeout:  &stopTimeout,
 	}, &container.HostConfig{
 		Binds:        binds,
-		NetworkMode:  "", //container.NetworkMode(config.NetworkMode),
+		NetworkMode:  container.NetworkMode(config.NetworkMode),
 		PortBindings: bindings,
 		AutoRemove:   config.AutoRemove,
 		CapAdd:       config.CapAdds,

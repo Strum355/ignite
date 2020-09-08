@@ -185,8 +185,6 @@ type VMSandboxSpec struct {
 
 type VMNetworkSpec struct {
 	Ports meta.PortMappings `json:"ports,omitempty"`
-	// TODO - why?
-	// Name  string            `json:"name,omitempty"`
 }
 
 // VMStorageSpec defines the VM's Volumes and VolumeMounts
