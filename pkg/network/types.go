@@ -49,17 +49,18 @@ const (
 	PluginDockerBridge PluginName = "docker-bridge"
 )
 
-type NetworkName string
-
-var _ fmt.Stringer = NetworkName("")
-
-func (nn NetworkName) String() string {
-	return string(nn)
-}
-
+// ListPlugins gets the list of available network plugins
 func ListPlugins() []PluginName {
 	return []PluginName{
 		PluginCNI,
 		PluginDockerBridge,
 	}
+}
+
+type DockerNetworkName string
+
+var _ fmt.Stringer = DockerNetworkName("")
+
+func (nn DockerNetworkName) String() string {
+	return string(nn)
 }

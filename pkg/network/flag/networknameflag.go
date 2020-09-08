@@ -8,20 +8,11 @@ import (
 )
 
 type DockerNetworkNameFlag struct {
-	value *network.NetworkName
+	value *network.DockerNetworkName
 }
 
 func (nf *DockerNetworkNameFlag) Set(val string) error {
-	// TODO: lol
-	/* for _, plugin := range plugins {
-		if plugin.String() == val {
-			*nf.value = plugin
-			return nil
-		}
-	}
-	return fmt.Errorf("invalid network plugin %q, must be one of %v", val, plugins) */
-
-	*nf.value = "ignite"
+	*nf.value = network.DockerNetworkName(val)
 	return nil
 }
 
@@ -33,11 +24,11 @@ func (nf *DockerNetworkNameFlag) String() string {
 }
 
 func (nf *DockerNetworkNameFlag) Type() string {
-	return "networkname"
+	return "docker-network-name"
 }
 
 var _ pflag.Value = &DockerNetworkNameFlag{}
 
-func NetworkNameVar(fs *pflag.FlagSet, ptr *network.NetworkName) {
-	fs.Var(&DockerNetworkNameFlag{value: ptr}, "network-name", fmt.Sprintf("Docker network to use."))
+func DockerNetworkNameVar(fs *pflag.FlagSet, ptr *network.DockerNetworkName) {
+	fs.Var(&DockerNetworkNameFlag{value: ptr}, "docker-network-name", fmt.Sprintf("Name of the docker network to use."))
 }

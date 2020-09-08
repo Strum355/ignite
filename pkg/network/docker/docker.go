@@ -23,7 +23,7 @@ func (*dockerNetworkPlugin) Name() network.PluginName {
 }
 
 func (*dockerNetworkPlugin) PrepareContainerSpec(container *runtime.ContainerConfig) error {
-	container.NetworkMode = string(providers.NetworkName)
+	container.NetworkMode = string(providers.DockerNetworkName)
 	return nil
 }
 
