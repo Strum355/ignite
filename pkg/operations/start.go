@@ -105,6 +105,8 @@ func StartVM(vm *api.VM, debug bool) error {
 		return fmt.Errorf("failed to start container for VM %q: %v", vm.GetUID(), err)
 	}
 
+	fmt.Println(containerID)
+
 	// Set up the networking
 	result, err := providers.NetworkPlugin.SetupContainerNetwork(containerID, vm.Spec.Network.Ports...)
 	if err != nil {

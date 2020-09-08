@@ -6,6 +6,7 @@ import (
 
 	meta "github.com/weaveworks/ignite/pkg/apis/meta/v1alpha1"
 	"github.com/weaveworks/ignite/pkg/network"
+	"github.com/weaveworks/ignite/pkg/providers"
 	"github.com/weaveworks/ignite/pkg/runtime"
 )
 
@@ -21,8 +22,8 @@ func (*dockerNetworkPlugin) Name() network.PluginName {
 	return network.PluginDockerBridge
 }
 
-func (*dockerNetworkPlugin) PrepareContainerSpec(_ *runtime.ContainerConfig) error {
-	// no-op, we don't need to set any special parameters on the container
+func (*dockerNetworkPlugin) PrepareContainerSpec(container *runtime.ContainerConfig) error {
+	container.NetworkMode = string(providers.NetworkName)
 	return nil
 }
 

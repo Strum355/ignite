@@ -148,6 +148,17 @@ func (dc *dockerClient) RunContainer(image meta.OCIImageRef, config *runtime.Con
 	stopTimeout := int(config.StopTimeout)
 	bindings, exposed := portBindingsToDocker(config.PortBindings)
 
+	fmt.Printf("%#v\n", &container.HostConfig{
+		Binds:        binds,
+		NetworkMode:  container.NetworkMode(config.NetworkMode),
+		PortBindings: bindings,
+		AutoRemove:   config.AutoRemove,
+		CapAdd:       config.CapAdds,
+		Resources: container.Resources{
+			Devices: devices,
+		},
+	})
+
 	c, err := dc.client.ContainerCreate(context.Background(), &container.Config{
 		Hostname:     config.Hostname,
 		ExposedPorts: exposed,
@@ -159,7 +170,7 @@ func (dc *dockerClient) RunContainer(image meta.OCIImageRef, config *runtime.Con
 		StopTimeout:  &stopTimeout,
 	}, &container.HostConfig{
 		Binds:        binds,
-		NetworkMode:  container.NetworkMode(config.NetworkMode),
+		NetworkMode:  "", //container.NetworkMode(config.NetworkMode),
 		PortBindings: bindings,
 		AutoRemove:   config.AutoRemove,
 		CapAdd:       config.CapAdds,

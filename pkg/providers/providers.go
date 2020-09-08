@@ -13,7 +13,8 @@ import (
 // The default network plugin is "cni"
 var NetworkPluginName network.PluginName
 
-// NetworkPlugin provides the chosen network plugin that should be used
+var NetworkName network.NetworkName
+
 // This should be set after parsing user input on what network plugin to use
 var NetworkPlugin network.Plugin
 
